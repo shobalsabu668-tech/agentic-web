@@ -1,0 +1,55 @@
+{
+  "ranAt": "2026-11-20T16:50:21.626Z",
+  "results": [
+    {
+      "id": "E1",
+      "ok": true,
+      "detail": "publisher requests on page load: pell 0, oregon 0"
+    },
+    {
+      "id": "E2",
+      "ok": true,
+      "detail": "dialog names http://localhost:8081 and says nothing is sent"
+    },
+    {
+      "id": "E3",
+      "ok": true,
+      "detail": "requests to pell after decline: 0"
+    },
+    {
+      "id": "E4",
+      "ok": true,
+      "detail": "pell served 7/7 publisher files, page not loaded, 0 requests with credentials"
+    },
+    {
+      "id": "E5",
+      "ok": true,
+      "detail": "publisher received highSchool, highestDegree, plannedProgram, pellLifetimeUsed; the dialog did not include the withheld citizenship value"
+    },
+    {
+      "id": "E6",
+      "ok": true,
+      "detail": "withheld citizenship -> rule unknown, outcome unknown"
+    },
+    {
+      "id": "E7",
+      "ok": true,
+      "detail": "Pell: not_eligible; Oregon 2027-28: possibly_eligible (citizenship rule met), computed at http://[::1]:8083; every rule sourced: true"
+    },
+    {
+      "id": "E8",
+      "ok": true,
+      "detail": "activity entries: declined read published rules http://localhost:8081 | allowed read published rules http://localhost:8081 | allowed screen federal_pell_grant http://localhost:8081 | allowed screen federal_pell_grant http://localhost:8081 | allowed read published rules http://[::1]:8083 | allowed screen oregon_opportunity_grant_2027_28 http://[::1]:8083"
+    },
+    {
+      "id": "E10",
+      "ok": true,
+      "detail": "Pell plan: skip, cites 668.33: true; after \"Share only what's needed\" the request holds citizenship; Oregon 2027-28 plan: share_needed; publisher requests while planning: 0"
+    },
+    {
+      "id": "E9",
+      "ok": true,
+      "detail": "horizontal overflow at 390 px: 0px; console errors: none; CSP violations: none"
+    }
+  ]
+}

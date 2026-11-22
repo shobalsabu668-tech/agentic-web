@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- No third-party scripts may run next to a visitor's key (spec section 4). scripts/retarget.mjs drops http: for an https deployment. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https: http:; frame-src 'self' https: http:; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta name="description" content="Keep your grant eligibility profile in your browser. Choose exactly what each independent award publisher can check, with its own published rules and sources.">
+    <meta name="theme-color" content="#f4f6f4">
+    <title>OpenAward — Student funding, on your terms</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23baf27b'/%3E%3Cpath d='M9 7h14v18H9z' fill='none' stroke='%23080c12' stroke-width='2'/%3E%3Ccircle cx='16' cy='14' r='3' fill='%23080c12'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="kit/kit.css">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="js/app.js"></script>
+    <script type="module" src="site.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="top">
+      <div class="wrap top-row">
+        <a class="brand" href="./" aria-label="OpenAward student funding eligibility"><span class="mark" aria-hidden="true"><i></i></span><span>openaward<span class="brand-light"> / funding profile</span></span></a>
+        <nav aria-label="Sections">
+          <a href="#passport">Your profile</a>
+          <a href="#publishers-section">Award desks</a>
+          <a href="#results">Your results</a>
+          <a href="#assistant">AI assistant</a>
+        </nav>
+        <a class="nav-cta" href="#passport">Get started <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="hero-grid wrap">
+          <div class="hero-copy">
+            <p class="eyebrow">STUDENT FUNDING, MADE CLEAR</p>
+            <h1>Find out what<br><span>you may qualify for.</span></h1>
+            <p class="lede">Check scholarships and grants with a private profile. Choose what each publisher can see.</p>
+            <div class="hero-actions">
+              <a class="button button-lime" href="#passport">Create your profile <span aria-hidden="true">→</span></a>
+              <a class="text-link" href="#publishers-section">See available checks</a>
+            </div>
+          </div>
+
+          <div class="hero-art" aria-label="Example of a private student funding profile" role="img">
+            <div class="profile-preview-card">
+              <div class="preview-head"><span class="preview-mark">O</span><span class="preview-title"><strong>Student funding profile</strong><small>Saved in this browser</small></span><span class="privacy-pill"><i></i>Private</span></div>
+              <div class="preview-rule"></div>
+              <p class="preview-label">PROFILE SECTIONS</p>
+              <div class="profile-chip-list"><span>Education</span><span>Location</span><span>Financial aid</span></div>
+              <div class="preview-foot"><span class="preview-shield">✓</span><span><strong>You choose what to share</strong><small>Nothing is sent without your approval.</small></span></div>
+            </div>
+          </div>
+
+          <div class="hero-bottom">
+            <div class="hero-stat"><strong>1</strong><span>Add your details</span></div><span class="step-arrow">→</span>
+            <div class="hero-stat"><strong>2</strong><span>Choose what to share</span></div><span class="step-arrow">→</span>
+            <div class="hero-stat"><strong>3</strong><span>Review sourced results</span></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="wrap content-wrap">
+        <section id="passport" class="card passport-card" aria-labelledby="passport-heading">
+          <div class="section-kicker">STEP 1</div>
+          <div class="card-head">
+            <div><h2 id="passport-heading">Your profile</h2><p class="section-intro">Add the details publishers need to check eligibility. Your profile stays in this browser.</p></div>
+            <p id="filled-count" class="muted count-pill" aria-live="polite"></p>
+          </div>
+          <fieldset class="storage">
+            <legend>Choose where to keep your profile</legend>
+            <label><input type="radio" name="storage-mode" value="tab" checked> This tab only</label>
+            <label><input type="radio" name="storage-mode" value="device"> Save in this browser</label>
+          </fieldset>
+          <p class="sample-prompt">New here? Try a sample profile:</p>
+          <div id="samples" class="samples" aria-label="Sample students"></div>
+          <p class="storage-note">Your profile is never sent automatically. Sensitive details stay private unless you choose to share them.</p>
+          <form id="passport-form" class="passport-form" novalidate></form>
+          <div class="row passport-tools">
+            <button type="button" id="export" class="ghost">↓ &nbsp;Download profile</button>
+            <label class="ghost file-button">↑ &nbsp;Import profile<input type="file" id="import" accept="application/json,.json"></label>
+            <button type="button" id="delete" class="danger">Delete saved data</button>
+          </div>
+          <p id="passport-status" class="muted" role="status"></p>
+        </section>
+
+        <section id="publishers-section" class="card publisher-section" aria-labelledby="publishers-heading">
+          <div class="section-kicker">STEP 2</div>
+          <div class="card-head"><div><h2 id="publishers-heading">Choose an award to check</h2><p class="section-intro">Read each publisher's rules, then choose which details to share.</p></div><span class="section-aside">2 DEMO PUBLISHERS</span></div>
+          <div id="publishers" class="publishers"></div>
+        </section>
+
+        <section id="results" class="card results-section" aria-labelledby="results-heading">
+          <div class="section-kicker">STEP 3</div>
+          <div class="card-head"><div><h2 id="results-heading">Your results</h2><p class="section-intro">See each answer and the rule behind it.</p></div></div>
+          <div id="compare" aria-live="polite"></div>
+        </section>
+
+        <div class="two">
+          <section id="checklist" class="card utility-card" aria-labelledby="checklist-heading">
+            <div class="section-kicker">NEXT</div><h2 id="checklist-heading">Next steps</h2>
+            <p class="muted small">Your checklist is saved in this tab.</p>
+            <ul id="checklist-items" class="checklist"></ul>
+            <form id="checklist-form" class="row">
+              <label for="checklist-text" class="sr-only">New checklist item</label>
+              <input id="checklist-text" type="text" maxlength="300" placeholder="Add a next step">
+              <button type="submit" class="ghost">Add <span aria-hidden="true">↗</span></button>
+            </form>
+            <p id="checklist-status" class="field-error" role="status"></p>
+          </section>
+
+          <section id="activity" class="card utility-card activity-card" aria-labelledby="activity-heading">
+            <div class="section-kicker">PRIVACY</div><h2 id="activity-heading">Sharing history</h2>
+            <p class="muted small">See every publisher contact and which details were shared.</p>
+            <ul id="activity-items" class="activity"></ul>
+          </section>
+        </div>
+
+        <section id="assistant" class="card assistant" aria-labelledby="assistant-heading">
+          <div class="section-kicker">OPTIONAL</div>
+          <h2 id="assistant-heading">Ask the assistant</h2>
+          <p class="assistant-lede">Get help understanding rules and comparing results. You approve every publisher contact.</p>
+          <p class="assistant-note">Your messages and eligibility plans go to your chosen AI provider. Profile values go to a publisher only when you approve a check.</p>
+          <p id="assistant-status" role="status">Connecting the assistant… If this message stays, the assistant could not load. Everything above still works without it.</p>
+          <div id="agent-app">
+            <div data-ns-slot="header"></div>
+            <div class="assistant-panels"><div data-ns-slot="chat"></div><div data-ns-slot="agents"></div></div>
+            <div data-ns-slot="settings"></div>
+          </div>
+        </section>
+
+        <aside class="demo-note"><span class="note-mark">i</span><p><strong>Demo only.</strong> Results are not award decisions. Check the official source before applying. OpenAward does not submit applications.</p></aside>
+      </div>
+    </main>
+
+    <footer class="foot"><div class="wrap foot-inner"><a class="brand" href="./"><span class="mark" aria-hidden="true"><i></i></span><span>openaward<span class="brand-light"> / funding profile</span></span></a><p>Student-controlled scholarship and grant checks.</p><a href="https://github.com/cognizant-ai-labs/agentic-web/blob/main/docs/worldwide_agentic_web_mvp_spec.md">Open web standards ↗</a><div class="agent-links">Agent files: <a href="agent-manifest.json">manifest</a> · <a href="openaward_passport.network.json">network</a></div></div></footer>
+  </body>
+</html>

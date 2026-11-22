@@ -1,0 +1,18 @@
+{
+  "protocol": "nsdeploy-link/v1",
+  "exports": [
+    {
+      "network": "oregon_grant_desk",
+      "front_man": "oregon_desk_assistant",
+      "aliases": [
+        "oregon_grant_desk",
+        "oregon_desk_assistant"
+      ],
+      "url": "oregon_grant_desk"
+    }
+  ],
+  "imports": [],
+  "link_updates": {
+    "mode": "browser-local"
+  }
+}

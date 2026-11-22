@@ -1,0 +1,11 @@
+{
+  "networks": [
+    {
+      "name": "oregon_grant_desk"
+    }
+  ],
+  "actions": {
+    "version": 1,
+    "module": "./bridge-actions.js"
+  }
+}

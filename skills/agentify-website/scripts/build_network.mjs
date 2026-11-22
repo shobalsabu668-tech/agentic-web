@@ -479,7 +479,9 @@ class NetworkBuilder {
    */
   async loadTemplateRules(runtime) {
     try {
-      const template = runtime.parseHocon(await readFile(NetworkBuilder.TEMPLATE, "utf8"));
+      // Match the source network after run() normalizes its line endings. Git on Windows
+      // may check templates out with CRLF, which otherwise creates false policy diffs.
+      const template = runtime.parseHocon((await readFile(NetworkBuilder.TEMPLATE, "utf8")).replace(/\r\n/g, "\n"));
       return (template.commondefs || {}).replacement_strings || null;
     } catch (error) {
       this.warnings.push(`Could not read the template's rules from ${fileURLToPath(NetworkBuilder.TEMPLATE)}: ${error.message}`);

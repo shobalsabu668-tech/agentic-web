@@ -1,0 +1,18 @@
+{
+  "protocol": "nsdeploy-link/v1",
+  "exports": [
+    {
+      "network": "pell_rules_desk",
+      "front_man": "pell_desk_assistant",
+      "aliases": [
+        "pell_rules_desk",
+        "pell_desk_assistant"
+      ],
+      "url": "pell_rules_desk"
+    }
+  ],
+  "imports": [],
+  "link_updates": {
+    "mode": "browser-local"
+  }
+}

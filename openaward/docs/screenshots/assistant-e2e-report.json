@@ -1,0 +1,55 @@
+{
+  "ranAt": "2026-11-20T16:50:08.601Z",
+  "results": [
+    {
+      "id": "A7",
+      "ok": true,
+      "detail": "one dialog named both origins; publisher requests before Allow: 0; plan: PASSPORT_PLAN: pell:federal_pell_grant=skip; oregon:oregon_opportunity_grant_2026_27=fill_passport_first; oregon:oregon_opportunity_grant_2027_28=share_needed; model requests holding a passport value: 0"
+    },
+    {
+      "id": "A8",
+      "ok": true,
+      "detail": "dialog showed this page as destination with the action and the fields to turn off; Pell fields shared after the plan: none"
+    },
+    {
+      "id": "A1",
+      "ok": true,
+      "detail": "card names the publisher and localhost:8081, shows the full 58-character request (exact), publisher requests while the card waited: 0"
+    },
+    {
+      "id": "A2",
+      "ok": true,
+      "detail": "publisher served /agent-manifest.json, /pell_rules_desk.network.json, /links.json, /bridge/action-bridge.html, /bridge/bridge-actions.js; requests with Authorization or cookies: 0"
+    },
+    {
+      "id": "A3",
+      "ok": true,
+      "detail": "12 model requests, all with the key: true, all on gpt-4.1-mini: true; agents: passport, pell_checker, pell_front; publisher agents offered: website_check_eligibility,website_get_published_rules"
+    },
+    {
+      "id": "A4",
+      "ok": true,
+      "detail": "final answer: PASSPORT_FINAL: PELL_FRONT: CHECKER: outcome=not_eligible; received=citizenship; evaluatedBy=Deterministic publisher kit on the publisher's origin. No model was used."
+    },
+    {
+      "id": "A5",
+      "ok": true,
+      "detail": "model requests holding the unshared SAI value: 0"
+    },
+    {
+      "id": "A9",
+      "ok": true,
+      "detail": "page result via assistant: not_eligible from http://localhost:8081; logged as sent [\"citizenship\"], publisher received [\"citizenship\"]; compare table updated: true"
+    },
+    {
+      "id": "A10",
+      "ok": true,
+      "detail": "a bridge request with an unshared field: Refused by the passport: the request holds \"High school completion\", which the student did not choose to share with Pell Rules Desk for Federal Pell Grant. Nothing was sent.; logged as refused"
+    },
+    {
+      "id": "A6",
+      "ok": true,
+      "detail": "CSP violations with the page's Content-Security-Policy while the whole agent path ran: none"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "brand": "Pell Rules Desk (unofficial demo)",
+  "networks": [
+    {
+      "name": "pell_rules_desk",
+      "front_man": "pell_desk_assistant",
+      "hocon": "./pell_rules_desk.network.json",
+      "description": "Ask about the Federal Pell Grant screening rules this unofficial demo desk publishes from 34 CFR, or screen OpenAward passport fields against them.",
+      "tags": [
+        "agentified-website",
+        "openaward-publisher"
+      ],
+      "sample_queries": [
+        "Which rules does your Pell Grant screening check, and which regulation does each come from?",
+        "Check federal_pell_grant: citizenship=permanent_resident highSchool=diploma highestDegree=none plannedProgram=undergraduate pellLifetimeUsed=0 federalAidProblem=no",
+        "I already have a bachelor's degree. Is there any way I could still get a Pell Grant?",
+        "How much Pell Grant money will I get?",
+        "Please submit my FAFSA for me."
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [],
+  "peer_policy": {
+    "mode": "closed",
+    "deny_origins": [],
+    "note": "Calls no other sites. Shares its two reads, get_published_rules and check_eligibility, with any caller through its action bridge."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "pell_rules_desk",
+    "front_man": "pell_desk_assistant",
+    "available": false,
+    "reason": "This is a static bundle; a public MCP facade requires an application host."
+  },
+  "theme": {
+    "primary": "#1d4f91"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "pell_rules_desk",
+        "front_man": "pell_desk_assistant",
+        "aliases": [
+          "pell_rules_desk",
+          "pell_desk_assistant"
+        ],
+        "url": "pell_rules_desk"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "get_published_rules",
+      "check_eligibility"
+    ]
+  },
+  "openaward": {
+    "role": "publisher",
+    "rulesFormat": "openaward-rules/v1",
+    "profileVersion": "openaward-passport/0.1",
+    "rules": "./rules.json",
+    "bridgeActions": [
+      "get_published_rules",
+      "check_eligibility"
+    ]
+  }
+}

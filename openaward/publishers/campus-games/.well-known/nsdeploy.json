@@ -1,0 +1,18 @@
+{
+  "protocol": "nsdeploy-link/v1",
+  "exports": [
+    {
+      "network": "campus_games",
+      "front_man": "campus_games_guide",
+      "aliases": [
+        "campus_games",
+        "campus_games_guide"
+      ],
+      "url": "campus_games"
+    }
+  ],
+  "imports": [],
+  "link_updates": {
+    "mode": "browser-local"
+  }
+}

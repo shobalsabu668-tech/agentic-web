@@ -1,0 +1,88 @@
+{
+  "brand": "Oregon Grant Rules Desk (unofficial demo)",
+  "networks": [
+    {
+      "name": "oregon_grant_desk",
+      "front_man": "oregon_desk_assistant",
+      "hocon": "./oregon_grant_desk.network.json",
+      "description": "Ask about the Oregon Opportunity Grant screening rules this unofficial demo desk publishes from OSAC's official page, or screen OpenAward passport fields against them.",
+      "tags": [
+        "agentified-website",
+        "openaward-publisher"
+      ],
+      "sample_queries": [
+        "What are the Oregon Opportunity Grant rules for 2026-27, and what is different for 2027-28?",
+        "Check oregon_opportunity_grant_2027_28: residenceState=OR residenceMonths=36 citizenship=daca_or_undocumented highestDegree=none plannedProgram=undergraduate collegeState=OR religiousDegree=no federalAidProblem=no",
+        "Can a DACA student get the Oregon Opportunity Grant?",
+        "What will the SAI limit be for 2027-28?",
+        "Can you reserve grant money for me before funds run out?"
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [],
+  "peer_policy": {
+    "mode": "closed",
+    "deny_origins": [],
+    "note": "Calls no other sites. Shares its two reads, get_published_rules and check_eligibility, with any caller through its action bridge."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "oregon_grant_desk",
+    "front_man": "oregon_desk_assistant",
+    "available": false,
+    "reason": "This is a static bundle; a public MCP facade requires an application host."
+  },
+  "theme": {
+    "primary": "#14593f"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "oregon_grant_desk",
+        "front_man": "oregon_desk_assistant",
+        "aliases": [
+          "oregon_grant_desk",
+          "oregon_desk_assistant"
+        ],
+        "url": "oregon_grant_desk"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "get_published_rules",
+      "check_eligibility"
+    ]
+  },
+  "openaward": {
+    "role": "publisher",
+    "rulesFormat": "openaward-rules/v1",
+    "profileVersion": "openaward-passport/0.1",
+    "rules": "./rules.json",
+    "bridgeActions": [
+      "get_published_rules",
+      "check_eligibility"
+    ]
+  }
+}

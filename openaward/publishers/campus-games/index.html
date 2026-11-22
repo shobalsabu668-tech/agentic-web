@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self' https:; frame-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta name="description" content="Quick games and friendly challenges from the Campus Games student group.">
+    <meta name="theme-color" content="#f1f6f7">
+    <title>Campus Games | Campus Sidequest</title>
+    <link rel="stylesheet" href="kit/publisher.css">
+    <script type="module" src="activities-page.js"></script>
+    <script type="module" src="site.js"></script>
+  </head>
+  <body data-brand="games">
+    <a class="skip" href="#activities">Skip to activities</a>
+    <header class="bar"><a class="brand" href="./"><span class="brand-mark">C</span> Campus Games</a><a class="back-link" href="http://127.0.0.1:8080/#planner">Back to Sidequest <span>↗</span></a></header>
+    <main>
+      <section class="hero">
+        <div class="hero-copy"><p class="eyebrow">INDEPENDENT CAMPUS GROUP · STUDENT CLUB</p><h1>Come for a<br><em>quick play.</em></h1><p>Easy games and tiny challenges made for the gap between classes. Drop in, meet someone, and see where the round goes.</p><a class="primary" href="#activities">Find a game <span>↓</span></a><div class="trust"><span>OPEN LIST</span><span>NO SIGN-UP</span><span>DEMO ACTIVITIES</span></div></div>
+        <div class="hero-object game-art" aria-label="Illustration of colorful game cards" role="img"><div class="orbit"></div><div class="game-card card-back"><span>✳</span><b>PLAY</b></div><div class="game-card card-front"><span class="card-suit">✦</span><b>YOUR<br>TURN</b><small>15 MIN ROUND</small></div><span class="float-note">easy in · easy out</span></div>
+      </section>
+      <section class="activity-section" id="activities"><div class="section-head"><div><p class="eyebrow">PICK YOUR NEXT 15 MINUTES</p><h2>Friendly first rounds</h2></div><p>Sample listings for this demo. Check with the group for current times and locations.</p></div><div class="activity-grid" id="activity-grid" aria-live="polite"></div></section>
+      <section class="assistant-wrap"><div class="assistant-intro"><span class="spark">✳</span><div><p class="eyebrow">OPTIONAL AI GUIDE</p><h2>Find your kind of game</h2><p>Ask what is on this public demo list. No sign-up or booking tools are connected.</p></div></div><p id="assistant-status" role="status">Connecting the optional guide…</p><div id="agent-app"><div data-ns-slot="header"></div><div class="assistant-panels"><div data-ns-slot="chat"></div><div data-ns-slot="agents"></div></div><div data-ns-slot="settings"></div></div></section>
+      <p class="disclaimer">Demo listings only · Activities are examples, not scheduled events. Campus Games does not collect registrations or payments here.</p>
+    </main>
+    <footer><a class="brand" href="./"><span class="brand-mark">C</span> Campus Games</a><a href="http://127.0.0.1:8080/">Campus Sidequest</a><a href="agent-manifest.json">Agent network files</a></footer>
+  </body>
+</html>

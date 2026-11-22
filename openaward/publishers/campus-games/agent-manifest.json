@@ -1,0 +1,19 @@
+{
+  "brand": "Campus Games",
+  "networks": [{
+    "name": "campus_games",
+    "front_man": "campus_games_guide",
+    "hocon": "./campus_games.network.json",
+    "description": "Explore the Campus Games public sample activities.",
+    "tags": ["agentified-website", "campus-activity"],
+    "sample_queries": ["What is a quick game I can try?", "Which activities are free?", "Show me something active and low-pressure.", "Can you reserve me a place?"]
+  }],
+  "llm_router": { "base_url": "https://api.otari.ai/api/v1", "mock": false, "byok_router": "https://api.otari.ai/api/v1" },
+  "allowed_peers": [],
+  "peer_policy": { "mode": "closed", "deny_origins": [], "note": "This site calls no other sites. It shares only its public read-only activity list." },
+  "agent_mcp": { "protocol": "nsdeploy-agent-mcp/v1", "network": "campus_games", "front_man": "campus_games_guide", "available": false, "reason": "This is a static bundle; a public MCP facade requires an application host." },
+  "theme": { "primary": "#477a91" },
+  "linking": { "protocol": "nsdeploy-link/v1", "exports": [{ "network": "campus_games", "front_man": "campus_games_guide", "aliases": ["campus_games", "campus_games_guide"], "url": "campus_games" }], "imports": [], "link_updates": { "mode": "browser-local" } },
+  "deployment": { "mode": "static", "self_contained_runtime": true, "browser_mock": false, "direct_byok": true, "direct_mcp_requires_cors": true, "public_mcp_facade": false },
+  "actions": { "version": 1, "module": "./site-actions.js", "bridge": "./bridge/action-bridge.html", "agentTools": ["get_activities"] }
+}

@@ -1,0 +1,90 @@
+{
+  "brand": "OpenAward — Student Funding Profile",
+  "networks": [
+    {
+      "name": "openaward_passport",
+      "front_man": "passport_assistant",
+      "hocon": "./openaward_passport.network.json",
+      "description": "A private student funding profile with an assistant that works for the student's privacy: it plans the least each award publisher needs to know, then has publishers check exactly the fields the student chose to share.",
+      "tags": [
+        "agentified-website",
+        "openaward-passport"
+      ],
+      "sample_queries": [
+        "Which publishers are worth asking, and what is the least I need to share with each?",
+        "Follow the plan for the Federal Pell Grant.",
+        "Ask the Oregon Grant Rules Desk to check the 2027-28 grant with what I chose to share.",
+        "Why do my Pell and Oregon results differ?",
+        "Add the next steps from my results to my checklist.",
+        "Apply for the Pell Grant for me."
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [
+    "http://localhost:8081",
+    "http://[::1]:8083"
+  ],
+  "peer_policy": {
+    "mode": "closed",
+    "deny_origins": [],
+    "note": "Calls only the publisher sites in allowed_peers, after the visitor agrees on a card for each one."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "openaward_passport",
+    "front_man": "passport_assistant",
+    "available": false,
+    "reason": "This is a static bundle; a public MCP facade requires an application host."
+  },
+  "theme": {
+    "primary": "#5b3cc4"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "openaward_passport",
+        "front_man": "passport_assistant",
+        "aliases": [
+          "openaward_passport",
+          "passport_assistant"
+        ],
+        "url": "openaward_passport"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "get_passport_status",
+      "read_publisher_rules",
+      "plan_disclosure",
+      "apply_disclosure_plan",
+      "prepare_publisher_request",
+      "add_checklist_item"
+    ]
+  },
+  "openaward": {
+    "role": "passport",
+    "profileVersion": "openaward-passport/0.1"
+  }
+}

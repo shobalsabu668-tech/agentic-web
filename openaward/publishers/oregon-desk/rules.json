@@ -1,0 +1,497 @@
+{
+  "format": "openaward-rules/v1",
+  "profileVersion": "openaward-passport/0.1",
+  "publisher": {
+    "name": "Oregon Grant Rules Desk (unofficial demo)",
+    "operator": "OpenAward Passport project",
+    "disclaimer": "Unofficial demonstration publisher run by the OpenAward Passport project. It is not affiliated with, endorsed by or speaking for the Oregon Higher Education Coordinating Commission or its Office of Student Access and Completion (OSAC). Rules are transcribed from OSAC's Oregon Opportunity Grant page, marked Last Updated October 2026, on the date shown. A real deployment would be published by the award owner. A screening result is not an award decision.",
+    "keepsData": "This publisher's code checks the fields you send in your own browser tab, on this publisher's origin, and does not store or forward them."
+  },
+  "opportunities": [
+    {
+      "id": "oregon_opportunity_grant_2026_27",
+      "title": "Oregon Opportunity Grant",
+      "awardYear": "2026-27",
+      "owner": "Oregon Office of Student Access and Completion (OSAC)",
+      "officialUrl": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+      "summary": "Oregon's largest state-funded, need-based grant for Oregon residents pursuing a first associate or bachelor's degree. For 2026-27 OSAC has published an SAI limit and a filing cut-off date, so both are screened here.",
+      "rulesCheckedAt": "2026-11-20",
+      "rulesSource": "OSAC Oregon Opportunity Grant page, Last Updated October 2026.",
+      "requestedFields": ["residenceState", "residenceMonths", "citizenship", "highestDegree", "plannedProgram", "collegeState", "religiousDegree", "sai", "aidApplicationDate", "federalAidProblem"],
+      "fieldReasons": {
+        "residenceState": "The grant is for Oregon residents.",
+        "residenceMonths": "You must be an Oregon resident for at least 12 months before college attendance.",
+        "citizenship": "Students admitted to the U.S. for the purpose of education are not eligible. DACA and undocumented students are eligible.",
+        "highestDegree": "The grant is for undergraduates with no prior baccalaureate degree.",
+        "plannedProgram": "The grant is for undergraduate study.",
+        "collegeState": "You must enroll at a participating Oregon-based institution.",
+        "religiousDegree": "Degrees in theology, divinity or religious education are not eligible.",
+        "sai": "For 2026-27 the SAI limit is 8,000.",
+        "aidApplicationDate": "For 2026-27 the FAFSA or ORSAA had to be submitted by May 15, 2026.",
+        "federalAidProblem": "You must have no federal loans in default and owe no federal grant refunds."
+      },
+      "rules": [
+        {
+          "id": "oog_oregon_resident",
+          "title": "Oregon resident",
+          "field": "residenceState",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "OR": { "status": "met", "reason": "You live in Oregon." }
+            },
+            "otherwise": { "status": "not_met", "reason": "The grant is for Oregon residents. One exception: out-of-state members of Native American tribes with traditional ties to Oregon may be considered Oregon residents. See OSAC's Out-of-State Tribal Residency page." }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Oregon resident for at least 12 months prior to college attendance and have not been admitted to the United States for the purpose of education."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_residency_12_months",
+          "title": "At least 12 months of Oregon residency before college",
+          "field": "residenceMonths",
+          "check": {
+            "type": "min",
+            "value": 12,
+            "metReason": "You will have lived there at least 12 months when classes start.",
+            "notMetReason": "You need at least 12 months of Oregon residency before college attendance."
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Oregon resident for at least 12 months prior to college attendance and have not been admitted to the United States for the purpose of education."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_not_admitted_for_education",
+          "title": "Not admitted to the U.S. for the purpose of education",
+          "field": "citizenship",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "us_citizen_or_national": { "status": "met", "reason": "Citizens and nationals meet this rule." },
+              "permanent_resident": { "status": "met", "reason": "Permanent residents meet this rule." },
+              "other_eligible_noncitizen": { "status": "met", "reason": "Your status was not granted for the purpose of education." },
+              "freely_associated_states": { "status": "verify", "reason": "OSAC's page does not address this status directly. Ask OSAC or your school." },
+              "daca_or_undocumented": { "status": "met", "reason": "OSAC: \"Undocumented students, including DACA students, are eligible for the Oregon Opportunity Grant if they meet all eligibility requirements.\"" },
+              "student_visa": { "status": "not_met", "reason": "A student visa means you were admitted to the U.S. for the purpose of education." },
+              "other_temporary": { "status": "verify", "reason": "This depends on why your status was granted. Ask OSAC or your school." },
+              "not_sure": { "status": "verify", "reason": "Ask OSAC or your school which rule applies to you." }
+            }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Oregon resident for at least 12 months prior to college attendance and have not been admitted to the United States for the purpose of education."
+          },
+          "nextStep": "If you cannot file the FAFSA, OSAC says to file the Oregon Student Aid Application (ORSAA) instead."
+        },
+        {
+          "id": "oog_no_prior_bachelor",
+          "title": "No prior baccalaureate degree",
+          "field": "highestDegree",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "none": { "status": "met", "reason": "No college degree yet meets this rule." },
+              "associate": { "status": "met", "reason": "An associate degree is not a baccalaureate degree." },
+              "bachelor": { "status": "not_met", "reason": "The grant is for students with no prior baccalaureate degree." },
+              "graduate_or_professional": { "status": "not_met", "reason": "The grant is for undergraduates with no prior baccalaureate degree." }
+            }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Undergraduate student with no prior baccalaureate degrees."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_undergraduate",
+          "title": "Undergraduate study",
+          "field": "plannedProgram",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "undergraduate": { "status": "met", "reason": "Undergraduate study meets this rule." },
+              "workforce_short_term": { "status": "verify", "reason": "OSAC's page does not say whether short-term workforce programs count. Ask your school." },
+              "teacher_postbacc": { "status": "not_met", "reason": "Post-bachelor's study is not undergraduate study with no prior baccalaureate degree." },
+              "graduate": { "status": "not_met", "reason": "The grant is for undergraduate students." },
+              "not_enrolling": { "status": "not_met", "reason": "You must be enrolled in classes." }
+            }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Undergraduate student with no prior baccalaureate degrees."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_participating_school",
+          "title": "Enrolled at a participating Oregon-based institution",
+          "field": "collegeState",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "OR": { "status": "verify", "reason": "Your college must be on OSAC's List of Participating Schools. Check the list for your college." }
+            },
+            "otherwise": { "status": "not_met", "reason": "The grant is used only at participating Oregon-based institutions." }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Be enrolled in classes at a participating Oregon-based postsecondary institution."
+          },
+          "nextStep": "First-time students must also complete admission to at least one eligible Oregon public or private nonprofit college."
+        },
+        {
+          "id": "oog_religious_degree",
+          "title": "Not a degree in theology, divinity or religious education",
+          "field": "religiousDegree",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "no": { "status": "met", "reason": "Your degree is not in one of these fields." },
+              "yes": { "status": "not_met", "reason": "Courses of study leading to these degrees are not eligible." }
+            }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Conditions of the Award",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Conditions of the Award",
+            "quote": "Students enrolled in courses of study leading to degrees in theology, divinity, or religious education are not eligible."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_sai_limit_2026_27",
+          "title": "Student Aid Index at or below the 2026-27 limit of 8,000",
+          "field": "sai",
+          "check": {
+            "type": "max",
+            "value": 8000,
+            "metReason": "Your SAI is at or below 8,000.",
+            "notMetReason": "Your SAI is above the 2026-27 limit of 8,000."
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, SAI Limit",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "SAI Limit",
+            "quote": "The current SAI limit for the 2026-27 academic year is 8,000."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_cutoff_2026_27",
+          "title": "FAFSA or ORSAA submitted by May 15, 2026",
+          "field": "aidApplicationDate",
+          "check": {
+            "type": "onOrBefore",
+            "value": "2026-05-15",
+            "metReason": "You submitted by the 2026-27 cut-off date.",
+            "notMetReason": "The 2026-27 cut-off date, May 15, 2026, has passed. Look at 2027-28 instead."
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Cut-Off Date",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Cut-Off Date",
+            "quote": "The final FAFSA/ORSAA submit date for 2026-27 academic year is May 15, 2026."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_no_default",
+          "title": "No federal loan default and no federal grant refund owed",
+          "field": "federalAidProblem",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "no": { "status": "met", "reason": "No default or refund owed meets this rule." },
+              "yes": { "status": "not_met", "reason": "You must have no federal loans in default and owe no refunds on federal grants." },
+              "not_sure": { "status": "verify", "reason": "Check your loans and grants on your StudentAid.gov dashboard." }
+            }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Have no federal student loans in default and not owe refunds on federal student grants."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_financial_need",
+          "title": "Financial need",
+          "check": {
+            "type": "verifyOnly",
+            "reason": "Need is worked out from your cost of attendance and resources, including federal aid. OSAC and your school decide it, not this desk."
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Have financial need based on the difference between cost of attendance and student's financial resources including federal aid and student's estimated family contribution."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_funds_first_come",
+          "title": "Funds are awarded first-come, first-served",
+          "check": {
+            "type": "verifyOnly",
+            "reason": "Even an eligible student may get no award once funds run out. For 2026-27 OSAC also does not accept FAFSA or ORSAA records with Professional Judgments."
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Awards are made on a first-come, first-served basis until funds are depleted."
+          },
+          "nextStep": "Correct any FAFSA or ORSAA errors right away: OSAC authorizes awards only for error-free applications."
+        }
+      ]
+    },
+    {
+      "id": "oregon_opportunity_grant_2027_28",
+      "title": "Oregon Opportunity Grant",
+      "awardYear": "2027-28",
+      "owner": "Oregon Office of Student Access and Completion (OSAC)",
+      "officialUrl": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+      "summary": "The same grant for the next award year. OSAC sets the SAI limit and cut-off date each year from application rates and funds, and has not published them for 2027-28, so this check does not ask for your SAI or filing date.",
+      "rulesCheckedAt": "2026-11-20",
+      "rulesSource": "OSAC Oregon Opportunity Grant page, Last Updated October 2026.",
+      "requestedFields": ["residenceState", "residenceMonths", "citizenship", "highestDegree", "plannedProgram", "collegeState", "religiousDegree", "federalAidProblem"],
+      "fieldReasons": {
+        "residenceState": "The grant is for Oregon residents.",
+        "residenceMonths": "You must be an Oregon resident for at least 12 months before college attendance.",
+        "citizenship": "Students admitted to the U.S. for the purpose of education are not eligible. DACA and undocumented students are eligible.",
+        "highestDegree": "The grant is for undergraduates with no prior baccalaureate degree.",
+        "plannedProgram": "The grant is for undergraduate study.",
+        "collegeState": "You must enroll at a participating Oregon-based institution.",
+        "religiousDegree": "Degrees in theology, divinity or religious education are not eligible.",
+        "federalAidProblem": "You must have no federal loans in default and owe no federal grant refunds."
+      },
+      "rules": [
+        {
+          "id": "oog_oregon_resident",
+          "title": "Oregon resident",
+          "field": "residenceState",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "OR": { "status": "met", "reason": "You live in Oregon." }
+            },
+            "otherwise": { "status": "not_met", "reason": "The grant is for Oregon residents. One exception: out-of-state members of Native American tribes with traditional ties to Oregon may be considered Oregon residents. See OSAC's Out-of-State Tribal Residency page." }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Oregon resident for at least 12 months prior to college attendance and have not been admitted to the United States for the purpose of education."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_residency_12_months",
+          "title": "At least 12 months of Oregon residency before college",
+          "field": "residenceMonths",
+          "check": {
+            "type": "min",
+            "value": 12,
+            "metReason": "You will have lived there at least 12 months when classes start.",
+            "notMetReason": "You need at least 12 months of Oregon residency before college attendance."
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Oregon resident for at least 12 months prior to college attendance and have not been admitted to the United States for the purpose of education."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_not_admitted_for_education",
+          "title": "Not admitted to the U.S. for the purpose of education",
+          "field": "citizenship",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "us_citizen_or_national": { "status": "met", "reason": "Citizens and nationals meet this rule." },
+              "permanent_resident": { "status": "met", "reason": "Permanent residents meet this rule." },
+              "other_eligible_noncitizen": { "status": "met", "reason": "Your status was not granted for the purpose of education." },
+              "freely_associated_states": { "status": "verify", "reason": "OSAC's page does not address this status directly. Ask OSAC or your school." },
+              "daca_or_undocumented": { "status": "met", "reason": "OSAC: \"Undocumented students, including DACA students, are eligible for the Oregon Opportunity Grant if they meet all eligibility requirements.\"" },
+              "student_visa": { "status": "not_met", "reason": "A student visa means you were admitted to the U.S. for the purpose of education." },
+              "other_temporary": { "status": "verify", "reason": "This depends on why your status was granted. Ask OSAC or your school." },
+              "not_sure": { "status": "verify", "reason": "Ask OSAC or your school which rule applies to you." }
+            }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Oregon resident for at least 12 months prior to college attendance and have not been admitted to the United States for the purpose of education."
+          },
+          "nextStep": "If you cannot file the FAFSA, OSAC says to file the Oregon Student Aid Application (ORSAA) instead."
+        },
+        {
+          "id": "oog_no_prior_bachelor",
+          "title": "No prior baccalaureate degree",
+          "field": "highestDegree",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "none": { "status": "met", "reason": "No college degree yet meets this rule." },
+              "associate": { "status": "met", "reason": "An associate degree is not a baccalaureate degree." },
+              "bachelor": { "status": "not_met", "reason": "The grant is for students with no prior baccalaureate degree." },
+              "graduate_or_professional": { "status": "not_met", "reason": "The grant is for undergraduates with no prior baccalaureate degree." }
+            }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Undergraduate student with no prior baccalaureate degrees."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_undergraduate",
+          "title": "Undergraduate study",
+          "field": "plannedProgram",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "undergraduate": { "status": "met", "reason": "Undergraduate study meets this rule." },
+              "workforce_short_term": { "status": "verify", "reason": "OSAC's page does not say whether short-term workforce programs count. Ask your school." },
+              "teacher_postbacc": { "status": "not_met", "reason": "Post-bachelor's study is not undergraduate study with no prior baccalaureate degree." },
+              "graduate": { "status": "not_met", "reason": "The grant is for undergraduate students." },
+              "not_enrolling": { "status": "not_met", "reason": "You must be enrolled in classes." }
+            }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Undergraduate student with no prior baccalaureate degrees."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_participating_school",
+          "title": "Enrolled at a participating Oregon-based institution",
+          "field": "collegeState",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "OR": { "status": "verify", "reason": "Your college must be on OSAC's List of Participating Schools. Check the list for your college." }
+            },
+            "otherwise": { "status": "not_met", "reason": "The grant is used only at participating Oregon-based institutions." }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Be enrolled in classes at a participating Oregon-based postsecondary institution."
+          },
+          "nextStep": "First-time students must also complete admission to at least one eligible Oregon public or private nonprofit college."
+        },
+        {
+          "id": "oog_religious_degree",
+          "title": "Not a degree in theology, divinity or religious education",
+          "field": "religiousDegree",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "no": { "status": "met", "reason": "Your degree is not in one of these fields." },
+              "yes": { "status": "not_met", "reason": "Courses of study leading to these degrees are not eligible." }
+            }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Conditions of the Award",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Conditions of the Award",
+            "quote": "Students enrolled in courses of study leading to degrees in theology, divinity, or religious education are not eligible."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_no_default",
+          "title": "No federal loan default and no federal grant refund owed",
+          "field": "federalAidProblem",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "no": { "status": "met", "reason": "No default or refund owed meets this rule." },
+              "yes": { "status": "not_met", "reason": "You must have no federal loans in default and owe no refunds on federal grants." },
+              "not_sure": { "status": "verify", "reason": "Check your loans and grants on your StudentAid.gov dashboard." }
+            }
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Have no federal student loans in default and not owe refunds on federal student grants."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_sai_limit_unpublished",
+          "title": "Student Aid Index limit for 2027-28",
+          "check": {
+            "type": "verifyOnly",
+            "reason": "OSAC has not published the 2027-28 SAI limit. It is set each year from application rates and available funds, so no SAI can be screened yet."
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, How much money will I receive?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "How much money will I receive?",
+            "quote": "Because available funds vary year to year, OSAC cannot forecast what the maximum SAI limit will be or when funds will be exhausted."
+          },
+          "nextStep": "Submit the 2027-28 FAFSA or ORSAA as soon as possible after October 1: awards go first-come, first-served."
+        },
+        {
+          "id": "oog_financial_need",
+          "title": "Financial need",
+          "check": {
+            "type": "verifyOnly",
+            "reason": "Need is worked out from your cost of attendance and resources, including federal aid. OSAC and your school decide it, not this desk."
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Have financial need based on the difference between cost of attendance and student's financial resources including federal aid and student's estimated family contribution."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "oog_apply_early",
+          "title": "Submit the FAFSA or ORSAA early",
+          "check": {
+            "type": "verifyOnly",
+            "reason": "There is no separate application. OSAC awards in filing order until funds run out, and sets the year's cut-off date from application rates and funds."
+          },
+          "source": {
+            "title": "OSAC: Oregon Opportunity Grant, Who is eligible?",
+            "url": "https://oregonstudentaid.gov/grants/oregon-opportunity-grant/",
+            "section": "Who is eligible?",
+            "quote": "Submit a FAFSA or ORSAA as soon as possible after October 1 each year"
+          },
+          "nextStep": "Submit the 2027-28 FAFSA or ORSAA now, and list at least one eligible Oregon college on it."
+        }
+      ]
+    }
+  ]
+}

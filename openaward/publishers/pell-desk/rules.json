@@ -1,0 +1,207 @@
+{
+  "format": "openaward-rules/v1",
+  "profileVersion": "openaward-passport/0.1",
+  "publisher": {
+    "name": "Pell Rules Desk (unofficial demo)",
+    "operator": "OpenAward Passport project",
+    "disclaimer": "Unofficial demonstration publisher run by the OpenAward Passport project. It is not affiliated with, endorsed by or speaking for the U.S. Department of Education or Federal Student Aid. Rules are transcribed from the Electronic Code of Federal Regulations (34 CFR) on the date shown, and each rule links to its section. A real deployment would be published by the award owner. A screening result is not an award decision: your school decides.",
+    "keepsData": "This publisher's code checks the fields you send in your own browser tab, on this publisher's origin, and does not store or forward them."
+  },
+  "opportunities": [
+    {
+      "id": "federal_pell_grant",
+      "title": "Federal Pell Grant",
+      "awardYear": "2026-27 and 2027-28",
+      "owner": "U.S. Department of Education, Federal Student Aid",
+      "officialUrl": "https://studentaid.gov/understand-aid/types/grants/pell",
+      "summary": "A federal grant for undergraduates with financial need that does not have to be repaid. This desk screens the student-eligibility rules in 34 CFR Parts 668 and 690. The amount, and the final decision, come from your school using your FAFSA.",
+      "rulesCheckedAt": "2026-11-20",
+      "rulesSource": "eCFR Title 34, up to date as of 2026-11-18 (sections amended through 91 FR 29333, May 19, 2026).",
+      "requestedFields": ["citizenship", "highSchool", "highestDegree", "plannedProgram", "pellLifetimeUsed", "federalAidProblem"],
+      "fieldReasons": {
+        "citizenship": "Pell has citizenship and residency requirements (34 CFR 668.33).",
+        "highSchool": "Pell requires a high school diploma or its recognized equivalent (34 CFR 668.32(e)).",
+        "highestDegree": "Pell is for students without a bachelor's or first professional degree, with two exceptions (34 CFR 668.32(c)(2)).",
+        "plannedProgram": "Pell is paid only for an eligible undergraduate program, or a qualifying teacher-certification or workforce program (34 CFR 690.75, 690.6).",
+        "pellLifetimeUsed": "Pell has a lifetime limit of six Scheduled Awards, shown as 600% (34 CFR 690.6(e)).",
+        "federalAidProblem": "A federal loan default or grant overpayment blocks federal aid unless it is resolved (34 CFR 668.32(g))."
+      },
+      "rules": [
+        {
+          "id": "pell_citizenship",
+          "title": "U.S. citizen, national or eligible noncitizen",
+          "field": "citizenship",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "us_citizen_or_national": { "status": "met", "reason": "U.S. citizens and nationals meet this rule." },
+              "permanent_resident": { "status": "met", "reason": "Permanent residents meet this rule with evidence of that status." },
+              "other_eligible_noncitizen": { "status": "verify", "reason": "This status counts only with evidence from immigration authorities. Your school confirms it." },
+              "freely_associated_states": { "status": "met", "reason": "Citizens of Micronesia, the Marshall Islands and Palau can receive Pell at an eligible institution in a State, or at a public or nonprofit institution in those countries (34 CFR 668.33(b))." },
+              "daca_or_undocumented": { "status": "not_met", "reason": "DACA and undocumented status are not among the categories this rule lists, so federal aid, including Pell, is not available. State programs can differ." },
+              "student_visa": { "status": "not_met", "reason": "A student visa is a temporary purpose, which this rule does not cover." },
+              "other_temporary": { "status": "not_met", "reason": "A temporary status is not among the categories this rule lists." },
+              "not_sure": { "status": "verify", "reason": "Ask your school's financial aid office which category applies to you." }
+            }
+          },
+          "source": {
+            "title": "34 CFR 668.33 Citizenship and residency requirements",
+            "url": "https://www.ecfr.gov/current/title-34/section-668.33",
+            "section": "§ 668.33(a)",
+            "quote": "to be eligible to receive title IV, HEA program assistance, a student must— (1) Be a citizen or national of the United States; or (2) Provide evidence from the U.S. Immigration and Naturalization Service that he or she— (i) Is a permanent resident of the United States; or (ii) Is in the United States for other than a temporary purpose with the intention of becoming a citizen or permanent resident;"
+          },
+          "nextStep": "The FAFSA checks a citizenship claim against Social Security Administration records. If it does not match, your school asks for documents (34 CFR 668.33(c))."
+        },
+        {
+          "id": "pell_high_school",
+          "title": "High school diploma or recognized equivalent",
+          "field": "highSchool",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "diploma": { "status": "met", "reason": "A high school diploma meets this rule." },
+              "state_equivalent": { "status": "met", "reason": "A recognized equivalent, such as a GED, meets this rule." },
+              "homeschool_completed": { "status": "met", "reason": "Completed home schooling meets this rule under State law (34 CFR 668.32(e)(4))." },
+              "in_high_school": { "status": "verify", "reason": "You need the diploma or equivalent before Pell is paid, and a student enrolled in a secondary school is not eligible (34 CFR 668.32(b)). Seniors can still file next year's FAFSA now." },
+              "none": { "status": "verify", "reason": "Some students without a diploma can qualify, for example in an eligible career pathway program (34 CFR 668.32(e)(2) to (5)). Ask your school." }
+            }
+          },
+          "source": {
+            "title": "34 CFR 668.32 Student eligibility",
+            "url": "https://www.ecfr.gov/current/title-34/section-668.32",
+            "section": "§ 668.32(e)(1)",
+            "quote": "(e)(1) Has a high school diploma or its recognized equivalent;"
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "pell_no_prior_degree",
+          "title": "No bachelor's or first professional degree",
+          "field": "highestDegree",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "none": { "status": "met", "reason": "No college degree yet meets this rule." },
+              "associate": { "status": "met", "reason": "An associate degree is not a baccalaureate degree, so it meets this rule." },
+              "bachelor": { "status": "not_met", "reason": "Pell is for students who do not have a baccalaureate degree." },
+              "graduate_or_professional": { "status": "not_met", "reason": "Pell is for students who do not have a baccalaureate or first professional degree." }
+            }
+          },
+          "exceptions": [
+            {
+              "field": "plannedProgram",
+              "in": ["teacher_postbacc"],
+              "onlyFor": ["bachelor", "graduate_or_professional"],
+              "status": "verify",
+              "reason": "A postbaccalaureate teacher certificate or licensing program can qualify (34 CFR 690.6(c)). Your school decides whether your program meets those conditions."
+            },
+            {
+              "field": "plannedProgram",
+              "in": ["workforce_short_term"],
+              "onlyFor": ["bachelor"],
+              "status": "verify",
+              "reason": "An eligible workforce program can qualify if you have no graduate credential (34 CFR 668.32(c)(2)(i)(B)(2)). Your school decides whether your program is eligible under 34 CFR 690.92."
+            }
+          ],
+          "source": {
+            "title": "34 CFR 668.32 Student eligibility",
+            "url": "https://www.ecfr.gov/current/title-34/section-668.32",
+            "section": "§ 668.32(c)(2)",
+            "quote": "(2) For purposes of the Federal Pell Grant Program— (i)(A) Does not have a baccalaureate or first professional degree; or (B)(1) Is enrolled in a postbaccalaureate teacher certificate or licensing program as described in 34 CFR 690.6(c); or (2) Is enrolled in an eligible workforce program as defined under 34 CFR 690.92 and— (i) Is not enrolled or accepted for enrollment in a program of study that leads to a graduate credential; and (ii) Has not attained a graduate credential;"
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "pell_undergraduate_program",
+          "title": "Enrolled in an eligible undergraduate program",
+          "field": "plannedProgram",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "undergraduate": { "status": "met", "reason": "An undergraduate degree or certificate program meets this rule when your school's program is eligible." },
+              "teacher_postbacc": { "status": "verify", "reason": "A qualifying postbaccalaureate teacher-certification student is treated as an undergraduate (34 CFR 690.6(d)). Your school confirms the program meets 34 CFR 690.6(c)." },
+              "workforce_short_term": { "status": "verify", "reason": "Pell can be paid for an eligible workforce program (34 CFR 690.6(f)). Your school confirms the program is eligible under 34 CFR 690.92." },
+              "graduate": { "status": "not_met", "reason": "Pell is paid to undergraduate students, not for a graduate program." },
+              "not_enrolling": { "status": "not_met", "reason": "Pell is paid only to a student enrolled in an eligible program." }
+            }
+          },
+          "source": {
+            "title": "34 CFR 690.75 Determination of eligibility for payment",
+            "url": "https://www.ecfr.gov/current/title-34/section-690.75",
+            "section": "§ 690.75(a)(2)",
+            "quote": "an institution may pay a Federal Pell Grant to an eligible student only after it determines that the student— (1) Qualifies as an eligible student under 34 CFR part 668, subpart C; (2) Is enrolled in an eligible program as an undergraduate student;"
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "pell_lifetime_limit",
+          "title": "Under the lifetime limit of six Scheduled Awards (600%)",
+          "field": "pellLifetimeUsed",
+          "check": {
+            "type": "max",
+            "value": 599,
+            "metReason": "You have used less than 600%, so some lifetime eligibility remains.",
+            "notMetReason": "600% is six Scheduled Awards, the lifetime limit."
+          },
+          "source": {
+            "title": "34 CFR 690.6 Duration of student eligibility",
+            "url": "https://www.ecfr.gov/current/title-34/section-690.6",
+            "section": "§ 690.6(e)",
+            "quote": "(e) A student may receive no more than six Scheduled Awards, as determined by the Secretary."
+          },
+          "nextStep": "Your Lifetime Eligibility Used is on your StudentAid.gov dashboard."
+        },
+        {
+          "id": "pell_no_default",
+          "title": "Not in default and no grant overpayment",
+          "field": "federalAidProblem",
+          "check": {
+            "type": "enum",
+            "cases": {
+              "no": { "status": "met", "reason": "No default or overpayment meets this rule." },
+              "yes": { "status": "verify", "reason": "This blocks federal aid until it is resolved. 34 CFR 668.35 lets some students regain eligibility, for example after satisfactory repayment arrangements." },
+              "not_sure": { "status": "verify", "reason": "Check your loans and grants on your StudentAid.gov dashboard." }
+            }
+          },
+          "source": {
+            "title": "34 CFR 668.32 Student eligibility",
+            "url": "https://www.ecfr.gov/current/title-34/section-668.32",
+            "section": "§ 668.32(g)",
+            "quote": "(g) Except as provided in § 668.35— (1) Is not in default, and certifies that he or she is not in default, on a loan made under any title IV, HEA loan program; ... (4) Is not liable for a grant or Federal Perkins loan overpayment."
+          },
+          "nextStep": ""
+        },
+        {
+          "id": "pell_award_amount",
+          "title": "Financial need and award amount",
+          "check": {
+            "type": "verifyOnly",
+            "reason": "Your award depends on your Student Aid Index (SAI) from the FAFSA and the payment schedule the Department of Education publishes each award year. Your school works it out; this desk does not screen it."
+          },
+          "source": {
+            "title": "34 CFR 690.62 Calculation of a Federal Pell Grant",
+            "url": "https://www.ecfr.gov/current/title-34/section-690.62",
+            "section": "§ 690.62(a)",
+            "quote": "(a) The amount of a student's Pell Grant for an academic year is based upon the payment and disbursement schedules published by the Secretary for each award year."
+          },
+          "nextStep": "Submit the FAFSA for the award year you will attend, at studentaid.gov."
+        },
+        {
+          "id": "pell_academic_progress",
+          "title": "Satisfactory academic progress",
+          "check": {
+            "type": "verifyOnly",
+            "reason": "Your school checks this against its own published standards, for continuing students each payment period."
+          },
+          "source": {
+            "title": "34 CFR 668.32 Student eligibility",
+            "url": "https://www.ecfr.gov/current/title-34/section-668.32",
+            "section": "§ 668.32(f)",
+            "quote": "(f) Maintains satisfactory academic progress in his or her course of study according to the institution's published standards of satisfactory academic progress that meet the requirements of § 668.34."
+          },
+          "nextStep": ""
+        }
+      ]
+    }
+  ]
+}

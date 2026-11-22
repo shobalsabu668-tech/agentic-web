@@ -1,0 +1,110 @@
+/* OpenAward publisher kit: result view styles. Uses --oa-* tokens with fallbacks, so a
+   site can theme it. Copied unchanged into each site by scripts/build.mjs. */
+/* Tokens live on :root so a badge outside a result, such as in a comparison table, has them too. */
+:root {
+  --oa-good: #116329;
+  --oa-good-bg: #dafbe1;
+  --oa-maybe: #7d4e00;
+  --oa-maybe-bg: #fff1c2;
+  --oa-unknown: #3d4b5c;
+  --oa-unknown-bg: #e7ecf2;
+  --oa-bad: #a40e26;
+  --oa-bad-bg: #ffe1e4;
+}
+.oa-result {
+  --oa-good: #116329;
+  --oa-good-bg: #dafbe1;
+  --oa-maybe: #7d4e00;
+  --oa-maybe-bg: #fff1c2;
+  --oa-unknown: #3d4b5c;
+  --oa-unknown-bg: #e7ecf2;
+  --oa-bad: #a40e26;
+  --oa-bad-bg: #ffe1e4;
+  border: 1px solid var(--oa-border, #d0d7de);
+  border-radius: 12px;
+  padding: 16px;
+  background: var(--oa-surface, #fff);
+  color: var(--oa-fg, #1f2328);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]),
+  :root:not([data-theme="light"]) .oa-result {
+    --oa-good: #7ee2a0;
+    --oa-good-bg: #10361f;
+    --oa-maybe: #f5cf72;
+    --oa-maybe-bg: #3d2e05;
+    --oa-unknown: #c4cfdb;
+    --oa-unknown-bg: #26303b;
+    --oa-bad: #ff9ba7;
+    --oa-bad-bg: #4a1219;
+  }
+}
+:root[data-theme="dark"],
+:root[data-theme="dark"] .oa-result {
+  --oa-good: #7ee2a0;
+  --oa-good-bg: #10361f;
+  --oa-maybe: #f5cf72;
+  --oa-maybe-bg: #3d2e05;
+  --oa-unknown: #c4cfdb;
+  --oa-unknown-bg: #26303b;
+  --oa-bad: #ff9ba7;
+  --oa-bad-bg: #4a1219;
+}
+.oa-result-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.oa-result-title { margin: 0; font-size: 1.05rem; }
+.oa-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+.oa-good { color: var(--oa-good); background: var(--oa-good-bg); }
+.oa-maybe { color: var(--oa-maybe); background: var(--oa-maybe-bg); }
+.oa-unknown { color: var(--oa-unknown); background: var(--oa-unknown-bg); }
+.oa-bad { color: var(--oa-bad); background: var(--oa-bad-bg); }
+.oa-headline { margin: 8px 0 12px; }
+.oa-provenance {
+  display: grid;
+  grid-template-columns: fit-content(40%) 1fr;
+  gap: 2px 12px;
+  margin: 0 0 12px;
+  font-size: 0.88rem;
+  color: var(--oa-muted, #59636e);
+}
+.oa-provenance dt { font-weight: 600; }
+.oa-provenance dd { margin: 0; overflow-wrap: anywhere; }
+.oa-rules { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.oa-rule {
+  border-left: 4px solid var(--oa-unknown);
+  padding: 6px 10px;
+  border-radius: 0 8px 8px 0;
+  background: var(--oa-soft, rgba(127, 127, 127, 0.06));
+}
+.oa-rule-met { border-left-color: var(--oa-good); }
+.oa-rule-not_met { border-left-color: var(--oa-bad); }
+.oa-rule-verify { border-left-color: var(--oa-maybe); }
+.oa-rule-line { margin: 0; }
+.oa-rule-status { font-weight: 700; font-size: 0.85rem; white-space: nowrap; }
+.oa-rule-met .oa-rule-status { color: var(--oa-good); }
+.oa-rule-not_met .oa-rule-status { color: var(--oa-bad); }
+.oa-rule-verify .oa-rule-status { color: var(--oa-maybe); }
+.oa-rule-unknown .oa-rule-status { color: var(--oa-unknown); }
+.oa-rule-reason, .oa-next { margin: 4px 0 0; font-size: 0.92rem; }
+.oa-next { font-weight: 600; }
+.oa-source { margin-top: 4px; font-size: 0.88rem; }
+.oa-source summary { cursor: pointer; color: var(--oa-link, #0b5cad); }
+.oa-source blockquote {
+  margin: 6px 0;
+  padding: 6px 10px;
+  border-left: 3px solid var(--oa-border, #d0d7de);
+  font-style: italic;
+}
+.oa-cite { margin: 0; overflow-wrap: anywhere; }
+.oa-disclaimer, .oa-error { font-size: 0.82rem; color: var(--oa-muted, #59636e); margin: 12px 0 0; }
+.oa-error { color: var(--oa-bad, #a40e26); }
+@media (max-width: 560px) {
+  .oa-provenance { grid-template-columns: 1fr; }
+  .oa-provenance dd { margin-bottom: 4px; }
+}

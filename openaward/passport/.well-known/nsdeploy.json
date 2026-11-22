@@ -1,0 +1,18 @@
+{
+  "protocol": "nsdeploy-link/v1",
+  "exports": [
+    {
+      "network": "openaward_passport",
+      "front_man": "passport_assistant",
+      "aliases": [
+        "openaward_passport",
+        "passport_assistant"
+      ],
+      "url": "openaward_passport"
+    }
+  ],
+  "imports": [],
+  "link_updates": {
+    "mode": "browser-local"
+  }
+}

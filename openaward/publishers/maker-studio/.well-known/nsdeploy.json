@@ -1,0 +1,18 @@
+{
+  "protocol": "nsdeploy-link/v1",
+  "exports": [
+    {
+      "network": "maker_studio",
+      "front_man": "maker_studio_guide",
+      "aliases": [
+        "maker_studio",
+        "maker_studio_guide"
+      ],
+      "url": "maker_studio"
+    }
+  ],
+  "imports": [],
+  "link_updates": {
+    "mode": "browser-local"
+  }
+}

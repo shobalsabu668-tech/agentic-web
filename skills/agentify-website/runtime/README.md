@@ -52,8 +52,8 @@ Edited files. Each one has a line near its top saying that it was changed:
   the template's default router, and fills in its settings for a key that starts with
   `otk_`. A key that starts with `otk_v1_eu_` gets the EU gateway,
   `https://eu.api.otari.ai/api/v1`, because the default gateway refuses it with HTTP 421.
-  The Google AI Studio model is `models/gemini-3.8-flash`, the name Google's model
-  list uses, so the panel's model check accepts it. The panel also has a Connect with
+  The Google AI Studio model is `gemini-3.8-flash`, without the `models/` prefix
+  used by Google's native API. The panel also has a Connect with
   OpenRouter button and recognizes OpenRouter keys, which start with `sk-or-`. Where the
   button cannot work, OpenRouter is listed with the other providers instead. For an
   OpenRouter key it links to the key's page on OpenRouter. The panel's first line says

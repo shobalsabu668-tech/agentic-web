@@ -58,9 +58,9 @@ export const API_KEY_PROVIDERS = [
     name: "Google AI Studio",
     keyUrl: "https://aistudio.google.com/apikey",
     router: "https://generativelanguage.googleapis.com/v1beta/openai",
-    model: "models/gemini-3.8-flash",
-    keyPrefixes: ["AIza"],
-    accessNote: "Free tier",
+    model: "gemini-3.8-flash",
+    keyPrefixes: ["AIza", "AQ."],
+    accessNote: "Free tier (limits apply)",
   },
   {
     name: "Groq",

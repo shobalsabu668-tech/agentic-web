@@ -1,0 +1,10 @@
+{
+  "networks": [
+    {
+      "name": "openaward_passport"
+    }
+  ],
+  "actions": {
+    "version": 1
+  }
+}

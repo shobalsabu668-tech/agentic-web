@@ -1,0 +1,81 @@
+{
+  "brand": "Campus Sidequest",
+  "networks": [
+    {
+      "name": "campus_sidequest",
+      "front_man": "sidequest_guide",
+      "hocon": "./campus_sidequest.network.json",
+      "description": "Plan a short campus break from two independent student groups' public activity lists, with the visitor approving every read.",
+      "tags": [
+        "agentified-website",
+        "campus-planner"
+      ],
+      "sample_queries": [
+        "I have 45 minutes and no money. Something creative?",
+        "Find me a quick card game with new people, free.",
+        "What does Makers Studio offer?",
+        "Can you book the activity for me?"
+      ]
+    }
+  ],
+  "llm_router": {
+    "base_url": "https://api.otari.ai/api/v1",
+    "mock": false,
+    "byok_router": "https://api.otari.ai/api/v1"
+  },
+  "allowed_peers": [
+    "http://localhost:8081",
+    "http://[::1]:8083"
+  ],
+  "peer_policy": {
+    "mode": "closed",
+    "deny_origins": [],
+    "note": "Calls only the two campus activity sites after the visitor approves each request."
+  },
+  "agent_mcp": {
+    "protocol": "nsdeploy-agent-mcp/v1",
+    "network": "campus_sidequest",
+    "front_man": "sidequest_guide",
+    "available": false,
+    "reason": "This is a static bundle; a public MCP facade requires an application host."
+  },
+  "theme": {
+    "primary": "#7166e8"
+  },
+  "linking": {
+    "protocol": "nsdeploy-link/v1",
+    "exports": [
+      {
+        "network": "campus_sidequest",
+        "front_man": "sidequest_guide",
+        "aliases": [
+          "campus_sidequest",
+          "sidequest_guide"
+        ],
+        "url": "campus_sidequest"
+      }
+    ],
+    "imports": [],
+    "link_updates": {
+      "mode": "browser-local"
+    }
+  },
+  "deployment": {
+    "mode": "static",
+    "self_contained_runtime": true,
+    "browser_mock": false,
+    "direct_byok": true,
+    "direct_mcp_requires_cors": true,
+    "public_mcp_facade": false
+  },
+  "actions": {
+    "version": 1,
+    "module": "./site-actions.js",
+    "bridge": "./bridge/action-bridge.html",
+    "agentTools": [
+      "get_sidequest_status",
+      "set_sidequest_choices",
+      "build_sidequest"
+    ]
+  }
+}

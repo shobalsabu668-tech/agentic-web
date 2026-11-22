@@ -8,6 +8,31 @@ function hostOf(url) {
   try { return new URL(url).host; } catch { return url || "?"; }
 }
 
+function responseError(baseUrl, status, bodyText) {
+  let payload = null;
+  try { payload = JSON.parse(bodyText); } catch { /* Keep the provider's response as plain text. */ }
+  const detail = payload?.error?.message || payload?.message || bodyText || "No error details were provided.";
+  const code = payload?.error?.status || payload?.error?.code || "";
+  const google = hostOf(baseUrl) === "generativelanguage.googleapis.com";
+  if (!google) return new Error(`LLM HTTP ${status}: ${String(detail).slice(0, 300)}`);
+
+  const message = String(detail);
+  const lower = `${code} ${message}`.toLowerCase();
+  if ([400, 401].includes(status) && /api.?key|unauthenticated|invalid.?credential/i.test(lower)) {
+    return new Error("Google AI Studio rejected this key. In AI model settings, select Google AI Studio, create a Gemini API key in AI Studio, paste it and select Save and start. A Google sign-in token is not an API key. Never share the key.");
+  }
+  if (status === 403) {
+    return new Error("Google denied this Gemini request. Check that the key is allowed to use the Gemini API and that its Google Cloud project has Gemini access. Then select Save and start again.");
+  }
+  if (status === 404 || /model.*not found|unknown model/i.test(message)) {
+    return new Error("Google did not recognize this model. Select Google AI Studio in AI model settings, then Save and start to apply its current model settings.");
+  }
+  if (status === 429) {
+    return new Error("Google's Gemini API limit has been reached for this key. Check its AI Studio usage and quota, then try again later. The Sidequest planner still works without the optional chat.");
+  }
+  return new Error(`Google Gemini returned HTTP ${status}: ${message.slice(0, 240)}`);
+}
+
 export function isMockResponse(configuredMock, routeKind, model) {
   return !!configuredMock || routeKind === "mock" || /neuro-san-mock/.test(model || "");
 }
@@ -128,7 +153,7 @@ export class LlmClient {
       });
       if (!resp.ok) {
         const txt = await resp.text().catch(() => "");
-        throw new Error(`LLM HTTP ${resp.status}: ${txt.slice(0, 300)}`);
+        throw responseError(this.baseUrl, resp.status, txt);
       }
 
       const routeKind = resp.headers.get("X-Nsdeploy-LLM-Route") || "";
